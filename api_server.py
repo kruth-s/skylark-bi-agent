@@ -336,34 +336,63 @@ def index() -> str:
             }
             .clarify-btn:hover { background: var(--primary); color: white; }
             .input-area {
-                padding: 1rem 1.25rem;
+                padding: 1rem 1.25rem 1.1rem;
                 border-top: 1px solid var(--border);
-                background-color: rgba(9, 13, 22, 0.85);
+                background: linear-gradient(180deg, rgba(15, 12, 23, 0.96), rgba(9, 13, 22, 0.98));
+            }
+            .query-label {
+                display: block;
+                margin: 0 0 0.55rem 0.15rem;
+                color: var(--text-muted);
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 0.68rem;
+                font-weight: 500;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+            }
+            .query-composer {
                 display: flex;
-                gap: 0.75rem;
+                align-items: stretch;
+                gap: 0.7rem;
             }
             .input-area input {
                 flex: 1;
-                background-color: var(--surface);
-                border: 1px solid var(--border);
+                min-width: 0;
+                background: rgba(5, 5, 6, 0.7);
+                border: 1px solid #59417c;
                 color: var(--text);
-                padding: 0.75rem 1rem;
-                border-radius: 10px;
-                font-size: 0.95rem;
+                padding: 0.9rem 1.05rem;
+                border-radius: 12px;
+                font-size: 0.94rem;
                 outline: none;
+                box-shadow: inset 0 0 0 1px rgba(155, 108, 255, 0.08);
+                transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
             }
-            .input-area input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-glow); }
+            .input-area input::placeholder { color: #7f748f; }
+            .input-area input:focus {
+                background: rgba(17, 16, 22, 0.95);
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px var(--primary-glow);
+            }
             .input-area button {
                 background: linear-gradient(135deg, #a06cff, #6d3dc8);
-                border: none;
+                border: 1px solid #b88cff;
                 color: white;
-                padding: 0 1.5rem;
-                border-radius: 10px;
+                min-width: 88px;
+                padding: 0 1.15rem;
+                border-radius: 12px;
                 font-weight: 600;
                 cursor: pointer;
-                transition: opacity 0.2s;
+                box-shadow: 0 5px 18px rgba(117, 68, 216, 0.25);
+                transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
             }
-            .input-area button:hover { opacity: 0.9; }
+            .input-area button:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(117, 68, 216, 0.38); }
+            .input-area button:disabled { cursor: wait; opacity: 0.6; transform: none; }
+            @media (max-width: 560px) {
+                .input-area { padding: 0.85rem; }
+                .query-composer { gap: 0.5rem; }
+                .input-area button { min-width: 72px; padding: 0 0.85rem; }
+            }
         </style>
     </head>
     <body>
@@ -385,8 +414,11 @@ def index() -> str:
                     </div>
                 </div>
                 <div class="input-area">
-                    <input type="text" id="queryInput" placeholder="Ask e.g. How's our pipeline looking for energy sector this quarter?" />
-                    <button onclick="sendQuery()">Send</button>
+                    <label class="query-label" for="queryInput">Live data query</label>
+                    <div class="query-composer">
+                        <input type="text" id="queryInput" placeholder="Which sectors contribute most to the current pipeline?" />
+                        <button onclick="sendQuery()">Send &gt;</button>
+                    </div>
                 </div>
             </div>
 
@@ -546,5 +578,10 @@ def index() -> str:
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("api_server:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run(
+        "api_server:app",
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", "8000")),
+        reload=os.getenv("UVICORN_RELOAD", "false").lower() == "true",
+    )
 
