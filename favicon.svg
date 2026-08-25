@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="BI Agent">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#bg)"/>
+  <path d="M15 17h8v30h-8zm14 0h8c7 0 11 3 11 8 0 3-2 6-5 7 4 1 7 4 7 8 0 5-4 9-12 9H29zm8 6v7h3c3 0 5-1 5-4 0-2-2-3-5-3zm0 13v8h4c3 0 5-1 5-4s-2-4-5-4z" fill="#fff"/>
+</svg>
