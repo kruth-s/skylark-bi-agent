@@ -4,7 +4,7 @@ Skylark Drones - Monday.com Business Intelligence Agent
 
 ---
 
-## 🏛️ System Architecture
+##  System Architecture
 
 ![Skylark BI Agent architecture overview](architecture-overview.svg)
 
