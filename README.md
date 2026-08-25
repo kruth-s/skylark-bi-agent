@@ -1,6 +1,6 @@
-2# Skylark Drones - Monday.com Business Intelligence Agent
+Skylark Drones - Monday.com Business Intelligence Agent
 
-> **An intelligent, resilient, founder-level BI Agent that dynamically queries Monday.com Deals & Work Orders boards, cleans messy real-world data, resolves ambiguity, and generates strategic executive insights.**
+ **An intelligent, resilient, founder-level BI Agent that dynamically queries Monday.com Deals & Work Orders boards, cleans messy real-world data, resolves ambiguity, and generates strategic executive insights.**
 
 ---
 
